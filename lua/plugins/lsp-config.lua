@@ -1,3 +1,14 @@
+---@param on_attach fun(client, buffer)
+local on_attach = function(on_attach)
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local buffer = args.buf ---@type number
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			on_attach(client, buffer)
+		end,
+	})
+end
+
 return {
 	-- mason
 	{
@@ -33,22 +44,22 @@ return {
 
 			local lspconfig = require("lspconfig")
 
-      -- lua
+			-- lua
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
 
-      -- python
+			-- python
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
 
-      -- js/ts
+			-- js/ts
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 			})
 
-      -- rust
+			-- rust
 			lspconfig.rust_analyzer.setup({
 				-- Server-specific settings. See `:help lspconfig-setup`
 				capabilities = capabilities,
@@ -79,4 +90,5 @@ return {
 			})
 		end,
 	},
+
 }
