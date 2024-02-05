@@ -34,12 +34,24 @@ return {
 		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
+			local breadcrump_sep = " ⟩ "
 			require("lualine").setup({
 				options = {
 					theme = "everforest",
 				},
 				sections = {
-					lualine_x = { "aerial" },
+					lualine_c = {
+						{
+							"filename",
+							path = 1,
+							separator = vim.trim(breadcrump_sep),
+							fmt = function(str)
+								local path_separator = package.config:sub(1, 1)
+								return str:gsub(path_separator, breadcrump_sep)
+							end,
+						},
+						{ "aerial" },
+					},
 				},
 			})
 		end,
