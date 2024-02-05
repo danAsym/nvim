@@ -20,24 +20,22 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover)
 -- which key mappings
 -- n
 local normal_mappings = {
+
+	-- AI
+	["<leader>a"] = {
+		-- gen nvim (ollama)
+		name = "AI",
+		o = { ":Gen<CR>", "Ollama Gen" },
+	},
+
+	-- buffers
+	["<leader>b"] = {
+		name = "buffers",
+		p = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+	},
+
 	-- explorer
 	["<leader>e"] = { ":Neotree filesystem reveal left<CR>", "Explorer" },
-
-	-- tabs
-	["<leader>t"] = {
-		name = "Tabs",
-		e = { ":tabedit", "Tab Edit" },
-		c = { ":tabclose", "Tab Close" },
-		n = { ":tabnext<CR>", "Next Tab" },
-		N = { ":tabprev<CR>", "Prev Tab" },
-	},
-
-	-- shortcuts
-	["<leader>s"] = {
-		name = "shortcuts",
-		r = { ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", "Replace All" },
-		R = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "Confirm Replace All" },
-	},
 
 	-- telescope
 	["<leader>f"] = {
@@ -66,12 +64,6 @@ local normal_mappings = {
 			end,
 			"Flash Treesitter Search",
 		},
-	},
-
-	-- buffers
-	["<leader>b"] = {
-		name = "buffers",
-		p = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
 	},
 
 	-- lsp
@@ -113,6 +105,22 @@ local normal_mappings = {
 		},
 	},
 
+	-- shortcuts
+	["<leader>s"] = {
+		name = "shortcuts",
+		r = { ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", "Replace All" },
+		R = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "Confirm Replace All" },
+	},
+
+	-- tabs
+	["<leader>t"] = {
+		name = "Tabs",
+		e = { ":tabedit", "Tab Edit" },
+		c = { ":tabclose", "Tab Close" },
+		n = { ":tabnext<CR>", "Next Tab" },
+		N = { ":tabprev<CR>", "Prev Tab" },
+	},
+
 	-- xtra
 	["<leader>x"] = {
 		name = "Xtra",
@@ -120,8 +128,8 @@ local normal_mappings = {
 		T = { "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", "Todo/Fix/Fixme" },
 		n = { ":NoiceLast<CR>", "Noice Last Message" },
 		N = { ":NoiceTelescope<CR>", "Noice History" },
-    l = {":Lazy<CR>", "Lazy"},
-    m = {":Mason<CR>", "Mason"},
+		l = { ":Lazy<CR>", "Lazy" },
+		m = { ":Mason<CR>", "Mason" },
 	},
 }
 
