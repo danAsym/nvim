@@ -93,4 +93,26 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
+
+	-- aerial
+	{
+		"stevearc/aerial.nvim",
+		event = "VeryLazy",
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("aerial").setup({
+				layout = {
+					min_width = 35,
+				},
+				highlight_on_jump = 0,
+				close_on_select = true,
+				show_guides = true,
+			})
+		end,
+	},
 }

@@ -103,6 +103,7 @@ local normal_mappings = {
 			end,
 			"Workspace Diag",
 		},
+		s = { "<cmd>AerialToggle<cr>", "Aerial Symbols" },
 	},
 
 	-- shortcuts

@@ -38,6 +38,9 @@ return {
 				options = {
 					theme = "everforest",
 				},
+				sections = {
+					lualine_x = { "aerial" },
+				},
 			})
 		end,
 	},
