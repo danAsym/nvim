@@ -29,12 +29,29 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.pyright.setup({})
-			lspconfig.tsserver.setup({})
+
+      -- lua
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+
+      -- python
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+			})
+
+      -- js/ts
+			lspconfig.tsserver.setup({
+				capabilities = capabilities,
+			})
+
+      -- rust
 			lspconfig.rust_analyzer.setup({
 				-- Server-specific settings. See `:help lspconfig-setup`
+				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {},
 				},
@@ -57,6 +74,7 @@ return {
 					"prettierd",
 					"black",
 					"ruff",
+					"eslint_d",
 				},
 			})
 		end,
