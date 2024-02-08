@@ -3,8 +3,10 @@ local tels = require("telescope.builtin")
 
 -- vim keymaps
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", opts)
-vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCycleNext<cr>", opts)
+vim.keymap.set("n", "<Tab>", ":tabnext<CR>", opts)
+vim.keymap.set("n", "<S-Tab>", ":tabprev<CR>", opts)
+vim.keymap.set("n", "]b", "<cmd>BufferLineCyclePrev<cr>", opts)
+vim.keymap.set("n", "[b", "<cmd>BufferLineCycleNext<cr>", opts)
 vim.keymap.set("v", "<Tab>", ">gv", opts)
 vim.keymap.set("v", "<S-Tab>", "<gv", opts)
 vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
@@ -32,6 +34,24 @@ local normal_mappings = {
 	["<leader>b"] = {
 		name = "buffers",
 		p = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+		c = {
+			function()
+				local bd = require("mini.bufremove").delete
+				if vim.bo.modified then
+					local choice =
+						vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+					if choice == 1 then -- Yes
+						vim.cmd.write()
+						bd(0)
+					elseif choice == 2 then -- No
+						bd(0, true)
+					end
+				else
+					bd(0)
+				end
+			end,
+			"Delete Buffer",
+		},
 	},
 
 	-- explorer
@@ -104,6 +124,18 @@ local normal_mappings = {
 			"Workspace Diag",
 		},
 		s = { "<cmd>AerialToggle<cr>", "Aerial Symbols" },
+		i = {
+			function()
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = {
+						only = { "source.organizeImports" },
+						diagnostics = {},
+					},
+				})
+			end,
+			"Organize Imports",
+		},
 	},
 
 	-- shortcuts
