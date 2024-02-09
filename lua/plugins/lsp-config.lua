@@ -57,14 +57,6 @@ return {
 
       lspconfig.ruff_lsp.setup({
         capabilities = capabilities,
-         ruff_lsp = function()
-            on_attach(function(client, _)
-              if client.name == "ruff_lsp" then
-                -- Disable hover in favor of Pyright
-                client.server_capabilities.hoverProvider = false
-              end
-            end)
-          end,
       })
 
 			-- js/ts

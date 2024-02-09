@@ -23,6 +23,30 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover)
 -- n
 local normal_mappings = {
 
+	-- g
+	["g"] = {
+		d = {
+			function()
+				require("telescope.builtin").lsp_definitions({ reuse_win = true })
+			end,
+			"Goto Definition",
+		},
+		r = { "<cmd>Telescope lsp_references<cr>", "References" },
+		D = { vim.lsp.buf.declaration, "Goto Declaration" },
+		I = {
+			function()
+				require("telescope.builtin").lsp_implementations({ reuse_win = true })
+			end,
+			"Goto Implementation",
+		},
+		y = {
+			function()
+				require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+			end,
+			"Goto T[y]pe Definition",
+		},
+	},
+
 	-- AI
 	["<leader>a"] = {
 		-- gen nvim (ollama)
@@ -66,6 +90,8 @@ local normal_mappings = {
 		h = { tels.help_tags, "Find Help Tags" },
 		l = { tels.live_grep, "Live Grep" },
 		b = { tels.buffers, "Find Buffers" },
+    s = { tels.lsp_workspace_symbols, "Document Symbols"},
+    S = { tels.lsp_dynamic_workspace_symbols, "Document Symbols"},
 		j = {
 			function()
 				require("flash").jump()
@@ -89,8 +115,12 @@ local normal_mappings = {
 	-- lsp
 	["<leader>l"] = {
 		name = "LSP",
-		d = { vim.lsp.buf.definition, "Code Definition" },
-		r = { vim.lsp.buf.references, "Code Reference" },
+		d = {
+			function()
+				require("telescope.builtin").diagnostics({ reuse_win = true })
+			end,
+			"Diagnostics",
+		},
 		a = { vim.lsp.buf.code_action, "Code Action" },
 		f = { vim.lsp.buf.format, "Code Format" },
 		t = {
