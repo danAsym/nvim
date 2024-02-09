@@ -37,7 +37,7 @@ return {
 			local breadcrump_sep = " ⟩ "
 			require("lualine").setup({
 				options = {
-					theme = "everforest",
+					theme = "nightfly",
 				},
 				sections = {
 					lualine_c = {
@@ -132,7 +132,6 @@ return {
 				end,
 				diagnostics = "nvim_lsp",
 				always_show_bufferline = true,
-				separator_style = "thick",
 				diagnostics_indicator = function(count, level, diagnostics_dict, context)
 					local icon = level:match("error") and " " or " "
 					return " " .. icon .. count
