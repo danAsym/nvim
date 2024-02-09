@@ -214,7 +214,15 @@ local normal_mappings = {
 }
 
 -- v
-local visual_mappings = {}
+local visual_mappings = {
+
+	-- AI
+	["<leader>a"] = {
+		-- gen nvim (ollama)
+		name = "AI",
+		o = { ":Gen<CR>", "Ollama Gen" },
+	},
+}
 
 -- i
 local insert_mappings = {}
