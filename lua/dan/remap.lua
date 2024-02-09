@@ -1,5 +1,6 @@
 local wk = require("which-key")
 local tels = require("telescope.builtin")
+local crates = require("crates")
 
 -- vim keymaps
 local opts = { noremap = true, silent = true }
@@ -90,8 +91,8 @@ local normal_mappings = {
 		h = { tels.help_tags, "Find Help Tags" },
 		l = { tels.live_grep, "Live Grep" },
 		b = { tels.buffers, "Find Buffers" },
-    s = { tels.lsp_workspace_symbols, "Document Symbols"},
-    S = { tels.lsp_dynamic_workspace_symbols, "Document Symbols"},
+		s = { tels.lsp_workspace_symbols, "Document Symbols" },
+		S = { tels.lsp_dynamic_workspace_symbols, "Document Symbols" },
 		j = {
 			function()
 				require("flash").jump()
@@ -165,6 +166,22 @@ local normal_mappings = {
 				})
 			end,
 			"Organize Imports",
+		},
+		c = {
+			name = "crates",
+			t = { crates.toggle, "Crates Toggle" },
+			r = { crates.reload, "Crates Reload" },
+
+			v = { crates.show_versions_popup, "Crates Versions" },
+			f = { crates.show_features_popup, "Crates Features" },
+			d = { crates.show_dependencies_popup, "Crates Deps" },
+
+			u = { crates.update_crate, "Update Crate" },
+			a = { crates.update_all_crates, "Update All" },
+
+			H = { crates.open_homepage, "Crate Homepage" },
+			D = { crates.open_documentation, "Create Docs" },
+			C = { crates.open_crates_io, "Crates IO" },
 		},
 	},
 
