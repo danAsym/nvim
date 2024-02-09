@@ -80,7 +80,7 @@ local normal_mappings = {
 	},
 
 	-- explorer
-	["<leader>e"] = { ":Neotree filesystem reveal left<CR>", "Explorer" },
+	["<leader>e"] = { ":Neotree toggle<CR>", "Explorer" },
 
 	-- telescope
 	["<leader>f"] = {
