@@ -26,6 +26,7 @@ local normal_mappings = {
 
 	-- g
 	["g"] = {
+    q = {"<cmd>Noice dismiss<CR>", "Dismiss Noice"},
 		d = {
 			function()
 				require("telescope.builtin").lsp_definitions({ reuse_win = true })
@@ -237,14 +238,14 @@ wk.register(normal_mappings, {
 
 -- visual mappings register
 wk.register(visual_mappings, {
-	mode = "n", -- NORMAL mode
+	mode = "v", -- VISUAL mode
 	silent = true,
 	noremap = true,
 })
 
 -- insert mappings register
 wk.register(insert_mappings, {
-	mode = "n", -- NORMAL mode
+	mode = "i", -- INSERT mode
 	silent = true,
 	noremap = true,
 })
