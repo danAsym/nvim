@@ -2,6 +2,12 @@ local wk = require("which-key")
 local tels = require("telescope.builtin")
 local crates = require("crates")
 
+-- autocmds
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.norg"},
+  command = "set conceallevel=3"
+})
+
 -- vim keymaps
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", opts)
@@ -55,6 +61,17 @@ local normal_mappings = {
 		name = "AI",
 		o = { ":Gen<CR>", "Ollama Gen" },
 	},
+
+  -- neorg
+  ["<leader>n"] = {
+    name = "Neorg",
+    h = {"<cmd>Neorg mode traverse-heading<CR>", "Heading Mode"},
+    n = {"<cmd>Neorg mode norg<CR>", "Norg Mode"},
+    i = {"<cmd>Neorg index<CR>", "Index"},
+    t = {"<cmd>Neorg toc right<CR>", "Toc"},
+    m = {"<cmd>Neorg inject-metadata<CR>", "Add Metadata"},
+    s = {"<cmd>Neorg generate-workspace-summary<CR>", "Add Summary"}
+  },
 
 	-- buffers
 	["<leader>b"] = {
