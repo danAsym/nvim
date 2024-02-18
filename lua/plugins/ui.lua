@@ -37,7 +37,7 @@ return {
 			local breadcrump_sep = " ⟩ "
 			require("lualine").setup({
 				options = {
-					theme = "nightfly",
+					theme = "tokyonight",
 				},
 				sections = {
 					lualine_c = {
@@ -58,26 +58,32 @@ return {
 	},
 
 	-- colorscheme
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		lazy = false,
-		config = function()
-			require("rose-pine").setup({
-				variant = "main",
+	-- {
+	-- 	"rose-pine/neovim",
+	-- 	name = "rose-pine",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("rose-pine").setup({
+	-- 			variant = "main",
+	--
+	-- 			styles = {
+	-- 				transparency = true,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("tokyonight").setup({
+				transparent = true,
 				styles = {
-					transparency = true,
+					sidebars = "transparent",
 				},
 			})
-		end,
-	},
-
-	{
-		"rebelot/kanagawa.nvim",
-		lazy = false,
-		config = function()
-			require("kanagawa").setup({})
 		end,
 	},
 
