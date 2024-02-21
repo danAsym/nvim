@@ -28,7 +28,7 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"pyright",
-          "ruff_lsp",
+					"ruff_lsp",
 					"tsserver",
 					"rust_analyzer",
 				},
@@ -53,11 +53,22 @@ return {
 			-- python
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
+				settings = {
+					pyright = {
+						disableOrganizeImports = true, -- Using Ruff
+					},
+					python = {
+						analysis = {
+							ignore = { "*" }, -- Using Ruff
+							typeCheckingMode = "off", -- Using mypy
+						},
+					},
+				},
 			})
 
-      lspconfig.ruff_lsp.setup({
-        capabilities = capabilities,
-      })
+			lspconfig.ruff_lsp.setup({
+				capabilities = capabilities,
+			})
 
 			-- js/ts
 			lspconfig.tsserver.setup({
@@ -88,12 +99,10 @@ return {
 				ensure_installed = {
 					"stylua",
 					"prettierd",
-					"black",
 					"ruff",
 					"eslint_d",
 				},
 			})
 		end,
 	},
-
 }

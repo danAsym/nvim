@@ -2,6 +2,7 @@ local wk = require("which-key")
 local tels = require("telescope.builtin")
 local crates = require("crates")
 
+
 -- autocmds
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = { "*.norg" },
