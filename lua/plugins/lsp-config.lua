@@ -22,7 +22,7 @@ return {
 	-- mason lsp config
 	{
 		"williamboman/mason-lspconfig.nvim",
-		lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
