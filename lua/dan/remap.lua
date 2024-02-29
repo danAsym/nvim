@@ -54,26 +54,6 @@ local normal_mappings = {
       "Harpoon",
     },
     q = { "<cmd>Noice dismiss<CR>", "Dismiss Noice" },
-    d = {
-      function()
-        require("telescope.builtin").lsp_definitions({ reuse_win = true })
-      end,
-      "Goto Definition",
-    },
-    r = { "<cmd>Telescope lsp_references<cr>", "References" },
-    D = { vim.lsp.buf.declaration, "Goto Declaration" },
-    I = {
-      function()
-        require("telescope.builtin").lsp_implementations({ reuse_win = true })
-      end,
-      "Goto Implementation",
-    },
-    y = {
-      function()
-        require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-      end,
-      "Goto T[y]pe Definition",
-    },
   },
 
   -- AI
@@ -107,6 +87,7 @@ local normal_mappings = {
   -- buffers
   ["<leader>b"] = {
     name = "buffers",
+    b = { tels.buffers, "Find Buffers" },
     p = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
     c = {
       function()
@@ -134,11 +115,21 @@ local normal_mappings = {
   -- telescope
   ["<leader>f"] = {
     name = "Find",
+    r = { tels.resume, "Resume Last" },
     f = { tels.find_files, "Find Files" },
     g = { tels.git_files, "Find Git Files" },
     k = { tels.keymaps, "Find Keymaps" },
     h = { tels.help_tags, "Find Help Tags" },
     l = { tels.live_grep, "Live Grep" },
+    L = {
+      function()
+        tels.live_grep({
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Buffers",
+        })
+      end,
+      "Live Grep in Open Buffers",
+    },
     b = { tels.buffers, "Find Buffers" },
     s = { tels.lsp_workspace_symbols, "Document Symbols" },
     S = { tels.lsp_dynamic_workspace_symbols, "Document Symbols" },
@@ -165,6 +156,8 @@ local normal_mappings = {
   -- lsp
   ["<leader>l"] = {
     name = "LSP",
+    -- e = { vim.diagnostics.open_float, "Show diagnostics [E]rror messages"},
+    -- Q = { vim.diagnostics.open_float, "Open diagnostics [Q]uickfix list"},
     d = {
       function()
         require("telescope.builtin").diagnostics({ reuse_win = true })
