@@ -19,6 +19,7 @@ opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
 opt.scrolloff = 8
+opt.cursorline = true
 opt.guicursor = "i:ver25-iCursor"
 opt.completeopt = "menuone,noinsert,noselect"
 opt.fillchars = { eob = " " }
@@ -38,6 +39,17 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 opt.clipboard:append("unnamedplus")
 opt.modifiable = true
+opt.mouse = "a" -- enable mouse support
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.api.nvim_create_autocmd("TextYankPost", {
