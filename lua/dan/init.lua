@@ -64,7 +64,11 @@ local opts = {
 require("lazy").setup(plugins, opts)
 
 -- colorsheme
-vim.cmd("colorscheme catppuccin")
+-- vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme duskfox")
+-- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme tokyonight")
+-- vim.cmd("colorscheme catppuccin")
 
 -- which key
 require("dan.remap")
