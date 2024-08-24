@@ -160,6 +160,7 @@ return {
               settings = server.settings,
               filetypes = server.filetypes,
               capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}),
+              autostart = false
             })
           end,
         },
