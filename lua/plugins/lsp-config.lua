@@ -62,6 +62,9 @@ return {
           -- cmd = {...},
           -- filetyles = {...},
           -- capabilities = {...},
+          on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end,
           settings = {
             pyright = {
               disableOrganizeImports = true, -- Using Ruff
@@ -89,21 +92,41 @@ return {
           -- capabilities = {...},
         },
 
-        -- rust_analyzer
-        -- rust_analyzer = {
-        --   -- cmd = {...},
-        --   -- filetyles = {...},
-        --   -- capabilities = {...},
-        --   settings = {
-        --     ["rust-analyzer"] = {},
-        --   },
-        -- },
+        rust_analyzer = {
+          -- cmd = {...},
+          -- filetyles = {...},
+          -- capabilities = {...},
+          autostart = true,
+          on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end,
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                allFeatures = true,
+              }
+            },
+          },
+        },
 
         -- gopls
         gopls = {
           -- cmd = {...},
           -- filetyles = {...},
           -- capabilities = {...},
+          autostart = true,
+          on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end,
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+              },
+              staticcheck = true,
+              gofumpt = true,
+            },
+          },
         },
 
         -- lua
@@ -160,7 +183,8 @@ return {
               settings = server.settings,
               filetypes = server.filetypes,
               capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}),
-              autostart = false
+              autostart = server.autostart or true,
+              on_attach = server.on_attach
             })
           end,
         },

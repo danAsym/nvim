@@ -1,6 +1,9 @@
 local opt = vim.opt
 
--- Tab/identation
+
+-- ======================================
+-- TAB/IDENTATION
+-- ======================================
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.shiftwidth = 2
@@ -8,13 +11,19 @@ opt.expandtab = true
 opt.smartindent = true
 opt.wrap = false
 
--- Search
+
+-- ======================================
+-- SEARCH
+-- ======================================
 opt.hlsearch = false
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 
--- Appearance
+
+-- ======================================
+-- APPEARANCE
+-- ======================================
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
@@ -24,7 +33,10 @@ opt.guicursor = "i:ver25-iCursor"
 opt.completeopt = "menuone,noinsert,noselect"
 opt.fillchars = { eob = " " }
 
--- Behaviour
+
+-- ======================================
+-- BEHAVIOUR
+-- ======================================
 opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
@@ -40,18 +52,14 @@ opt.iskeyword:append("-")
 opt.clipboard:append("unnamedplus")
 opt.modifiable = true
 opt.mouse = "a" -- enable mouse support
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+
+-- ------------------------------------------------------------------
 -- highlight yanked text for 200ms using the "Visual" highlight group
+-- ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight_yank", {}),
 	desc = "Hightlight selection on yank",

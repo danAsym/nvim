@@ -1,24 +1,21 @@
 local wk = require("which-key")
 local tels = require("telescope.builtin")
-local crates = require("crates")
-local chatgpt = require("chatgpt")
 local harpoon = require("harpoon")
+local ls = require("luasnip")
 
--- copilot
--- vim.g.copilot_no_tab_map = true
--- vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- vim.g.copilot_enabled = false
 
--- autocmds
+-- ======================================
+-- AUTOCMDS
+-- ======================================
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = { "*.norg" },
   command = "set conceallevel=3",
 })
 
--- basic harpoon-telescope configuration
+
+-- ======================================
+-- BASIC HARPOON-TELESCOPE CONFIGURATION
+-- ======================================
 local conf = require("telescope.config").values
 local function toggle_telescope(harpoon_files)
   local file_paths = {}
@@ -36,7 +33,10 @@ local function toggle_telescope(harpoon_files)
   }):find()
 end
 
--- vim keymaps
+
+-- ======================================
+-- VIM KEYMAPS
+-- ======================================
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":tabprev<CR>", opts)
@@ -51,18 +51,43 @@ vim.keymap.set("n", "N", "Nzz", opts)
 vim.keymap.set("n", "-", ":split<CR>", opts)
 vim.keymap.set("n", "|", ":vsplit<CR>", opts)
 vim.keymap.set("n", "=", "<C-w>=<cr>", opts)
+vim.keymap.set("n", "K", vim.lsp.buf.hover) -- lsp vim keymaps
 
--- lsp vim keymaps
-vim.keymap.set("n", "K", vim.lsp.buf.hover)
+-- --------------------------------------
+-- LUASNIPPET
+-- --------------------------------------
 
--- which key mappings
+-- jump forward within snippet
+vim.keymap.set({ "i" }, "<C-k>", function() ls.expand() end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-l>", function() ls.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-h>", function() ls.jump(-1) end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end, { silent = true })
+
+-- source snippets
+vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/dan/snippets.lua<CR>")
+
+
+-- ======================================
+-- WHICH KEY MAPPINGS
+-- ======================================
+
+-- --------------------------------------
+-- HARPOON
+-- --------------------------------------
 wk.add({
-  { "ga", function() harpoon:list():add() end,          desc = "Harpoon Mark [A]dd" },
+  { "ga", function() harpoon:list():add() end,             desc = "Harpoon Mark [A]dd" },
   { "gh", function() toggle_telescope(harpoon:list()) end, desc = "[H]arpoon" },
   { "gq", "<cmd>Noice dismiss<CR>",                        desc = "[Q]uit Noice" },
 })
 
--- ai keymaps
+-- --------------------------------------
+-- AI KEYMAPS (ChatGPT)
+-- --------------------------------------
 wk.add({
   { "<leader>a",  group = "[A]i" },
   { "<leader>ag", ":Gen<CR>",                                      desc = "Ollama [G]en" },
@@ -76,7 +101,9 @@ wk.add({
   { "<leader>ar", "<cmd>ChatGPTRun code_readability_analysis<CR>", desc = "Code [R]eadability Analysis" },
 })
 
--- buffer keymaps
+-- --------------------------------------
+-- BUFFER KEYMAPS
+-- --------------------------------------
 wk.add({
   { "<leader>b",  group = "[B]uffers" },
   { "<leader>bb", tels.buffers,                   desc = "Find [B]uffers" },
@@ -102,13 +129,17 @@ wk.add({
   },
 })
 
--- explorer
+-- --------------------------------------
+-- EXPLORER
+-- --------------------------------------
 wk.add({
   { "<leader>e", group = "[E]xplorer" },
   { "<leader>e", ":Neotree reveal<CR>", desc = "[E]xplorer" },
 })
 
--- find keymaps
+-- --------------------------------------
+-- FIND KEYMAPS
+-- --------------------------------------
 wk.add({
   { "<leader>f",  group = "[F]ind" },
   { "<leader>fr", tels.resume,      desc = "[R]esume Last" },
@@ -154,7 +185,9 @@ wk.add({
   },
 })
 
--- lsp keymaps
+-- --------------------------------------
+-- LSP KEYMAPS
+-- --------------------------------------
 wk.add({
   { "<leader>l",  group = "[L]SP" },
   {
@@ -187,7 +220,9 @@ wk.add({
   },
 })
 
--- shortcuts
+-- --------------------------------------
+-- SHORTCUTS
+-- --------------------------------------
 wk.add({
   { "<leader>s",  group = "[S]hortcuts" },
   { "<leader>sr", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>",        desc = "[R]eplace All" },
@@ -203,7 +238,9 @@ wk.add({
   { "<leader>tp", ":tabprev<CR>",  desc = "[P]rev Tab" },
 })
 
--- Extra
+-- --------------------------------------
+-- EXTRA
+-- --------------------------------------
 wk.add({
   { "<leader>x",  group = "[X]tra" },
   { "<leader>xt", "<cmd>TodoTelescope<cr>",                         desc = "[T]odo" },

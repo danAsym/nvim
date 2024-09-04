@@ -79,8 +79,25 @@ return {
     config = function()
       require("rose-pine").setup({
         variant = "main",
+        dim_inactive_windows = true,
         styles = {
-          transparency = true,
+          transparency = false,
+        },
+        highlight_groups = {
+          CurSearch = { fg = "base", bg = "leaf", inherit = false },
+          Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
+          TelescopeBorder = { fg = "overlay", bg = "overlay" },
+          TelescopeNormal = { fg = "subtle", bg = "overlay" },
+          TelescopeSelection = { fg = "text", bg = "highlight_med" },
+          TelescopeSelectionCaret = { fg = "love", bg = "highlight_med" },
+          TelescopeMultiSelection = { fg = "text", bg = "highlight_high" },
+
+          TelescopeTitle = { fg = "base", bg = "love" },
+          TelescopePromptTitle = { fg = "base", bg = "pine" },
+          TelescopePreviewTitle = { fg = "base", bg = "iris" },
+
+          TelescopePromptNormal = { fg = "text", bg = "surface" },
+          TelescopePromptBorder = { fg = "surface", bg = "surface" },
         },
       })
     end,
@@ -90,7 +107,7 @@ return {
     "folke/tokyonight.nvim",
     priority = 1000,
     config = function()
-      local transparent = true -- set to true if you would like to enable transparency
+      local transparent = false -- set to true if you would like to enable transparency
 
       local bg = "#011628"
       local bg_dark = "#011423"
@@ -172,10 +189,6 @@ return {
         overrides = function(colors)
           local theme = colors.theme
           return {
-            NormalFloat = { bg = "none" },
-            FloatBorder = { bg = "none" },
-            FloatTitle = { bg = "none" },
-
             -- telescope
             TelescopeTitle = { fg = theme.ui.special, bold = true },
             TelescopePromptNormal = { bg = theme.ui.bg_p1 },
@@ -263,6 +276,9 @@ return {
         end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = true,
+        numbers = function(opts)
+          return string.format('%s.%s', opts.lower(opts.id), opts.lower(opts.ordinal))
+        end,
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
           local icon = level:match("error") and " " or " "
           return " " .. icon .. count
