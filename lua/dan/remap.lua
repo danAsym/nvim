@@ -249,6 +249,7 @@ wk.add({
   { "<leader>xh", ":NoiceTelescope<CR>",                            desc = "Noice [H]istory" },
   { "<leader>xl", ":Lazy<CR>",                                      desc = "[L]azy" },
   { "<leader>xm", ":Mason<CR>",                                     desc = "[M]ason" },
+  { "<leader>xu", ":Telescope luasnip<CR>",                         desc = "l[U]asnip" },
   { "<leader>xs", ":SessionSave<CR>",                               desc = "[S]ession save" },
   { "<leader>xd", ":SessionDelete<CR>",                             desc = "session [D]elete" },
 })

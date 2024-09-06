@@ -92,6 +92,12 @@ return {
           -- capabilities = {...},
         },
 
+        tailwindcss = {
+          -- cmd = {...},
+          -- filetyles = {...},
+          -- capabilities = {...},
+        },
+
         rust_analyzer = {
           -- cmd = {...},
           -- filetyles = {...},
@@ -168,6 +174,8 @@ return {
         "prettier",
         "goimports",
         "gofumpt",
+        "tailwindcss-language-server",
+        "css-lsp"
       })
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,

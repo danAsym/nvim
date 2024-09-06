@@ -23,6 +23,7 @@ return {
     -- friendly-snippets - enable standardized comments snippets
     ls.filetype_extend("typescript", { "tsdoc" })
     ls.filetype_extend("javascript", { "jsdoc", "next", "react" })
+    ls.filetype_extend("javascriptreact", { "html", "css" })
     ls.filetype_extend("lua", { "luadoc" })
     ls.filetype_extend("python", { "pydoc" })
     ls.filetype_extend("rust", { "rustdoc" })
