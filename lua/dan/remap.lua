@@ -134,7 +134,7 @@ wk.add({
 -- --------------------------------------
 wk.add({
   { "<leader>e", group = "[E]xplorer" },
-  { "<leader>e", ":Neotree reveal<CR>", desc = "[E]xplorer" },
+  { "<leader>e", ":Oil --float<CR>", desc = "[E]xplorer" },
 })
 
 -- --------------------------------------

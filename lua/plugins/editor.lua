@@ -136,8 +136,8 @@ return {
         {
           auto_restore_enabled = true,
           auto_session_suppress_dirs = { "~/", "~/Dev/", "~/Downloads", "~/Documents", "~/Desktop/" },
-          pre_save_cmds = { 'Neotree close' },
-          post_restore_cmds = { 'Neotree filesystem show' },
+          -- pre_save_cmds = { 'Neotree close' },
+          -- post_restore_cmds = { 'Neotree filesystem show' },
         }
       )
     end

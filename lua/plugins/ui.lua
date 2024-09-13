@@ -214,30 +214,58 @@ return {
     end
   },
 
-
-  -- neo tree
+  -- oil nvim
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    'stevearc/oil.nvim',
     lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     config = function()
-      require("neo-tree").setup({
-        close_if_last_window = true,
-        popup_border_style = "rounded",
-        window = {
-          mappings = {
-            ["o"] = "open",
-          },
+      require("oil").setup({
+        keymaps = {
+          ["g?"] = "actions.show_help",
+          ["<CR>"] = "actions.select",
+          ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+          ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+          ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+          ["<C-v>"] = "actions.preview",
+          ["<C-c>"] = "actions.close",
+          ["<C-l>"] = "actions.refresh",
+          ["<C-p>"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["`"] = "actions.cd",
+          ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["<"] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
         },
       })
-    end,
+    end
   },
+
+  -- neo tree
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v3.x",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+  --     "MunifTanjim/nui.nvim",
+  --     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+  --   },
+  --   config = function()
+  --     require("neo-tree").setup({
+  --       close_if_last_window = true,
+  --       popup_border_style = "rounded",
+  --       window = {
+  --         mappings = {
+  --           ["o"] = "open",
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- dressing
   {

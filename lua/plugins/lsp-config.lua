@@ -90,6 +90,7 @@ return {
           -- cmd = {...},
           -- filetyles = {...},
           -- capabilities = {...},
+          alt_name = "ts_ls"
         },
 
         tailwindcss = {
@@ -186,7 +187,8 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            require("lspconfig")[server_name].setup({
+            local name = server["alt_name"] or server_name
+            require("lspconfig")[name].setup({
               cmd = server.cmd,
               settings = server.settings,
               filetypes = server.filetypes,
